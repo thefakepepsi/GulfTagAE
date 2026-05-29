@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GulfTag AE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('how')">How It Works</button>
+    <button onclick="showSection('problem')">Problem</button>
+    <button onclick="showSection('solution')">Solution</button>
+    <button onclick="showSection('pricing')">Pricing</button>
+    <button onclick="showSection('founder')">Founder</button>
+    <button onclick="showSection('register')">Register</button>
+    <button onclick="showSection('generate')">Generate QR</button>
+    <button onclick="showSection('item')">Item Details</button>
+  </nav>
+
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <h1>Welcome to GulfTag AE</h1>
+    <p>Smart QR stickers that help lost items find their way home.</p>
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <h1>How It Works</h1>
+    <p>1. Tag It — Stick a GulfTag QR on your item.</p>
+    <p>2. Scan It — Register your item in seconds.</p>
+    <p>3. Ping It — If someone finds it, they scan and return it.</p>
+  </section>
+
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <h1>The Problem</h1>
+    <p>Kids lose bottles, jackets, lunch boxes and bags every day in UAE schools.</p>
+    <p>Lost-and-found boxes are always full, and parents waste money replacing items.</p>
+  </section>
+
+
+  <!-- SOLUTION -->
+  <section id="solution">
+    <h1>The Solution</h1>
+    <p>GulfTag AE uses QR stickers to help return lost items quickly and safely.</p>
+    <p>Scan → See owner → Contact parent → Return item.</p>
+  </section>
+
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <h1>Pricing</h1>
+    <p>Starter Pack — AED 25</p>
+    <p>Family Pack — AED 40</p>
+    <p>School Pack — AED 500</p>
+  </section>
+
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <h1>About the Founder</h1>
+    <p>CEO Superpower: Problem Spotter</p>
+    <p>I created GulfTag AE because kids in my school lose things every day.</p>
+  </section>
+
+
+  <!-- REGISTER -->
+  <section id="register">
+    <h1>Register Your Item</h1>
+
+    <form id="registerForm">
+      <label>Parent Name:</label>
+      <input type="text" id="parentName">
+
+      <label>Phone Number:</label>
+      <input type="text" id="phone">
+
+      <label>Child Name:</label>
+      <input type="text" id="childName">
+
+      <label>Class:</label>
+      <input type="text" id="class">
+
+      <label>Item Name:</label>
+      <input type="text" id="itemName">
+
+      <button type="button" onclick="registerItem()">Register Item</button>
+    </form>
+
+    <div id="registerResult"></div>
+  </section>
+
+
+  <!-- QR GENERATOR -->
+  <section id="generate">
+    <h1>Generate QR Code</h1>
+    <p>Enter Item ID:</p>
+    <input type="text" id="qrItemId">
+    <button onclick="generateQR()">Generate</button>
+
+    <div id="qrCode"></div>
+  </section>
+
+
+  <!-- ITEM DETAILS -->
+  <section id="item">
+    <h1>Item Details</h1>
+    <div id="itemDetails"></div>
+  </section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
