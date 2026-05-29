@@ -1,247 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>GulfTag AE – Smart QR Stickers for Schools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- QRCode library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <meta charset="UTF-8">
+  <title>GulfTag – Smart Safety Tags for Students</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">GulfTag AE</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#register">Free Trial</a>
-    </nav>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>GulfTag</h1>
+      <p class="subtitle">Smart safety tags for students in the UAE.</p>
+      <p class="subtitle">If a child is lost, anyone can check their GulfTag ID and contact the parent instantly.</p>
+      <a href="#buy" class="primary-btn">Get GulfTag</a>
+    </div>
   </header>
 
-  <main>
-    <!-- HOME / ABOUT / PARTNERING -->
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <h1>Smart QR stickers that help lost school items find their way home.</h1>
-        <p>
-          GulfTag AE partners with schools to make lost‑and‑found a thing of the past.
-          With simple QR stickers on student belongings, staff can scan and instantly
-          see who an item belongs to and how to return it. Parents get peace of mind,
-          schools stay organized, and students learn responsibility in a gentle, practical way.
+  <main class="main">
+    <section id="how-it-works" class="card">
+      <h2>How GulfTag works</h2>
+      <ol>
+        <li><strong>Parent buys a GulfTag</strong> and fills in student details.</li>
+        <li><strong>We generate a unique GulfTag ID</strong> and store it securely.</li>
+        <li><strong>We print the ID on a sticker</strong> and attach it to the student’s belongings.</li>
+        <li><strong>If found, someone goes to</strong> <code>https://gulftag-5c4e6.web.app</code> and enters the ID.</li>
+        <li><strong>They see the parent’s contact</strong> and can call immediately.</li>
+      </ol>
+    </section>
+
+    <section id="buy" class="card">
+      <h2>Buy a GulfTag</h2>
+      <p class="muted">Fill in the details below. After submission, you’ll get a GulfTag ID that we will print on your sticker.</p>
+
+      <form id="gulfTagForm">
+        <div class="field">
+          <label for="studentName">Student Name</label>
+          <input id="studentName" type="text" required placeholder="e.g. Ahmed Ali">
+        </div>
+
+        <div class="field">
+          <label for="grade">Grade / Class</label>
+          <input id="grade" type="text" required placeholder="e.g. Grade 4">
+        </div>
+
+        <div class="field">
+          <label for="schoolName">School Name</label>
+          <input id="schoolName" type="text" required placeholder="e.g. Dubai International School">
+        </div>
+
+        <div class="field">
+          <label for="parentContact">Parent Contact (phone or email)</label>
+          <input id="parentContact" type="text" required placeholder="e.g. +971 50 123 4567">
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" rows="2" placeholder="Allergies, special instructions, etc."></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn full">Generate GulfTag</button>
+      </form>
+
+      <div id="formMessage" class="message hidden"></div>
+    </section>
+
+    <section id="generated" class="card hidden">
+      <h2>Your GulfTag is ready</h2>
+      <p class="muted">Share this with the printing team. This is what goes on the sticker.</p>
+
+      <div class="tag-box">
+        <p><strong>GulfTag ID:</strong> <span id="generatedId"></span></p>
+        <p><strong>Instructions for sticker:</strong></p>
+        <p class="mono small">
+          If found, go to https://gulftag-5c4e6.web.app<br>
+          and enter this GulfTag ID: <span id="generatedIdInline"></span>
         </p>
-        <p>
-          Instead of every parent struggling alone, GulfTag AE becomes a shared system
-          that supports the whole school community. Schools choose a plan, students
-          receive their stickers, and from that moment on, lost items finally have a
-          clear way back home.
-        </p>
-        <button id="scrollToPricing" class="primary-btn">View School Plans</button>
-      </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section id="problem" class="content-section">
-      <h2>The problem: lost items cost time, money, and energy</h2>
-      <p>
-        Every school deals with the same daily challenge: students lose things. Not because
-        they’re irresponsible, but because school life is busy, fast, and full of movement.
-        Water bottles get left on playgrounds, lunch boxes stay in classrooms, jackets
-        disappear on buses, and pencil cases vanish somewhere between the cafeteria and
-        the library. Multiply this by hundreds of students, and suddenly the school is
-        drowning in a mountain of unclaimed items.
-      </p>
-      <p>
-        Parents feel the impact too. They spend money replacing the same items over and over,
-        and they waste time searching through lost‑and‑found boxes that rarely contain what
-        they’re looking for. Teachers and staff also lose valuable time sorting, organizing,
-        and trying to identify who owns what. Even when items are found, there’s no easy way
-        to connect them back to the right student. A simple missing label can turn a perfectly
-        good item into something that never gets returned.
-      </p>
-      <p>
-        This problem isn’t small — it’s constant, expensive, and frustrating for everyone
-        involved. Schools want to help, parents want peace of mind, and students just want
-        their things back. But without a simple, universal system, lost items continue to
-        pile up, costing families money and schools time.
-      </p>
-    </section>
-
-    <!-- SOLUTION -->
-    <section id="solution" class="content-section alt">
-      <h2>The solution: GulfTag AE makes lost items find their way home</h2>
-      <p>
-        GulfTag AE was created to solve this everyday problem in the simplest, smartest way
-        possible. Instead of relying on handwritten labels that fade, fall off, or get ignored,
-        GulfTag uses smart QR stickers that instantly connect a lost item to its owner. One scan
-        is all it takes for staff, teachers, or even other students to see who the item belongs
-        to and how to return it.
-      </p>
-      <p>
-        For schools, GulfTag AE becomes a built‑in support system. With flexible plans starting
-        at <strong>AED 100 per month for every 3 grades</strong>, schools can choose how many
-        stickers each student receives — 1, 2, or 5. Once the stickers are placed on student
-        belongings, the entire school community benefits. Staff can scan a code and immediately
-        understand what to do. Parents feel reassured knowing there’s a reliable backup in place.
-        And students learn responsibility because their items are now traceable.
-      </p>
-      <p>
-        The system is designed to be effortless. No apps, no accounts, no complicated setup.
-        Just a quick registration, a simple QR code, and a smooth return process. GulfTag AE
-        reduces lost‑and‑found clutter, saves schools time, saves parents money, and ensures
-        that the things students rely on every day always have a way back home.
-      </p>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="content-section">
-      <h2>Pricing: simple plans for every school</h2>
-      <p class="section-intro">
-        Schools come in all sizes, and not every school needs the same level of coverage.
-        That’s why GulfTag AE offers flexible, affordable plans designed around every
-        3 grade levels. Each plan includes enough QR stickers for every student in those
-        grades, making it easy for staff to scan and return lost items instantly.
-      </p>
-
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>AED 100 / month</h3>
-          <p class="pricing-subtitle">Per 3 grades – 1 sticker per student</p>
-          <p>
-            A simple, low‑cost way to reduce lost items. Each student receives one GulfTag
-            sticker for their most frequently misplaced item.
-          </p>
-          <button class="secondary-btn open-payment" data-plan="AED 100 / month – 1 sticker per student">
-            Try Demo Payment
-          </button>
-        </div>
-
-        <div class="pricing-card featured">
-          <h3>AED 200 / month</h3>
-          <p class="pricing-subtitle">Per 3 grades – 2 stickers per student</p>
-          <p>
-            A balanced option for schools that want more coverage without stretching their
-            budget. Each student receives two stickers for multiple belongings.
-          </p>
-          <button class="primary-btn open-payment" data-plan="AED 200 / month – 2 stickers per student">
-            Try Demo Payment
-          </button>
-        </div>
-
-        <div class="pricing-card">
-          <h3>AED 500 / month</h3>
-          <p class="pricing-subtitle">Per 3 grades – 5 stickers per student</p>
-          <p>
-            The complete GulfTag experience. Each student receives five stickers, enough to
-            cover all essential belongings and maximize returns.
-          </p>
-          <button class="secondary-btn open-payment" data-plan="AED 500 / month – 5 stickers per student">
-            Try Demo Payment
-          </button>
-        </div>
       </div>
 
-      <p class="section-outro">
-        Instead of parents repeatedly replacing lost items, schools can offer a simple system
-        that prevents the problem before it grows. Staff save time, parents save money, and
-        students learn responsibility — all for less than the cost of replacing a single lost
-        water bottle.
+      <p class="muted small">
+        This GulfTag will be active for <strong>1 year</strong> from today. After that, it will automatically expire.
       </p>
-    </section>
-
-    <!-- REGISTRATION / FREE TRIAL -->
-    <section id="register" class="content-section alt">
-      <h2>Free trial: generate and print your first GulfTag</h2>
-      <p>
-        Every user gets one free trial to see how GulfTag AE works. Register a student once,
-        generate a QR code, and print stickers that can be placed on their belongings. After
-        the free trial, schools can choose a plan that fits their needs.
-      </p>
-
-      <div class="form-container">
-        <form id="registrationForm">
-          <div class="form-row">
-            <label for="studentName">Student name</label>
-            <input type="text" id="studentName" required />
-          </div>
-
-          <div class="form-row">
-            <label for="grade">Grade</label>
-            <input type="text" id="grade" required />
-          </div>
-
-          <div class="form-row">
-            <label for="schoolName">School name</label>
-            <input type="text" id="schoolName" required />
-          </div>
-
-          <div class="form-row">
-            <label for="parentContact">Parent contact (phone or email)</label>
-            <input type="text" id="parentContact" required />
-          </div>
-
-          <div class="form-row captcha-row">
-            <label id="captchaQuestion"></label>
-            <input type="number" id="captchaAnswer" required />
-          </div>
-
-          <p id="trialMessage" class="info-message"></p>
-
-          <button type="submit" id="registerBtn" class="primary-btn">
-            Generate QR Code (Free Trial)
-          </button>
-        </form>
-
-        <div class="qr-preview">
-          <h3>QR preview</h3>
-          <div id="qrcode" class="qrcode-box"></div>
-          <p id="qrInfo" class="info-message"></p>
-          <button id="printBtn" class="secondary-btn" disabled>Print Stickers</button>
-        </div>
-      </div>
     </section>
   </main>
 
-  <!-- FAKE PAYMENT MODAL -->
-  <div id="paymentModal" class="modal-overlay">
-    <div class="modal">
-      <button class="modal-close" id="closePayment">&times;</button>
-      <h2>Demo Payment</h2>
-      <p id="selectedPlan" class="modal-plan"></p>
-      <p class="modal-note">
-        This is a demo payment screen for presentation purposes only. No real money will be charged.
-      </p>
-
-      <form id="paymentForm">
-        <div class="form-row">
-          <label for="cardName">Cardholder name</label>
-          <input type="text" id="cardName" required />
-        </div>
-        <div class="form-row">
-          <label for="cardNumber">Card number</label>
-          <input type="text" id="cardNumber" maxlength="19" required />
-        </div>
-        <div class="form-row inline">
-          <div>
-            <label for="expiry">Expiry (MM/YY)</label>
-            <input type="text" id="expiry" maxlength="5" required />
-          </div>
-          <div>
-            <label for="cvv">CVV</label>
-            <input type="password" id="cvv" maxlength="4" required />
-          </div>
-        </div>
-        <button type="submit" class="primary-btn">Pay (Demo)</button>
-        <p id="paymentStatus" class="success-message"></p>
-      </form>
-    </div>
-  </div>
-
   <footer class="footer">
-    <p>&copy; <span id="year"></span> GulfTag AE. Smart QR stickers for schools in the Gulf region.</p>
+    <p>GulfTag &copy; <span id="year"></span> · Built for student safety in the UAE.</p>
   </footer>
 
+  <!-- Firebase + app logic -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
