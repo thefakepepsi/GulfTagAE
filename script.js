@@ -200,3 +200,4 @@ document.getElementById("paymentForm").addEventListener("submit", e => {
   e.preventDefault();
   paymentStatusEl.textContent = "Payment successful (demo).";
 });
+
