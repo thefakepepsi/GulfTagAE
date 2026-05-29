@@ -67,8 +67,12 @@ function generateQR() {
     return;
   }
 
-  const baseUrl = window.location.origin + window.location.pathname;
+  // YOUR GITHUB REPOSITORY URL (as requested)
+  const baseUrl = "https://github.com/thefakepepsi/GulfTagAE";
+
   const itemUrl = `${baseUrl}?item=${encodeURIComponent(itemId)}`;
+
+  console.log("QR URL:", itemUrl);
 
   const qrImg = document.createElement("img");
   qrImg.src =
