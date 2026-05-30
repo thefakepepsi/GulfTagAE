@@ -102,7 +102,14 @@ document.getElementById("registrationForm").addEventListener("submit", function 
   }
 
   const code = generateRandomCode();
-  const data = { studentName, grade, schoolName, parentContact, code };
+  const data = {
+    studentName,
+    grade,
+    schoolName,
+    parentContact,
+    code,
+    createdAt: Date.now()
+  };
 
   localStorage.setItem(FREE_TRIAL_KEY, "true");
   localStorage.setItem(REGISTERED_DATA_KEY, JSON.stringify(data));
@@ -176,16 +183,38 @@ document.getElementById("checkBtn").addEventListener("click", () => {
   const input = document.getElementById("checkInput").value.trim();
   const result = document.getElementById("checkResult");
 
+  const storedData = JSON.parse(localStorage.getItem(REGISTERED_DATA_KEY) || "{}");
+  const freeTrialCode = storedData.code;
+  const createdAt = storedData.createdAt;
+
+  // Free trial code
+  if (input === freeTrialCode) {
+    const now = Date.now();
+    const daysPassed = Math.floor((now - createdAt) / (1000 * 60 * 60 * 24));
+    const daysLeft = Math.max(0, 30 - daysPassed);
+
+    result.textContent =
+      `This GulfTag is a free trial. It is valid. It will expire in ${daysLeft} days.`;
+    result.style.color = "#16a34a";
+    return;
+  }
+
+  // Hardcoded valid
   if (input === "GULFTAG-1234567") {
     result.textContent = "This GulfTag is valid and currently in use.";
     result.style.color = "#16a34a";
-  } else if (input === "GULFTAG-0000000") {
+    return;
+  }
+
+  // Hardcoded invalid
+  if (input === "GULFTAG-0000000") {
     result.textContent = "This tag is invalid. Please purchase a new GulfTag.";
     result.style.color = "#b91c1c";
-  } else {
-    result.textContent = "Code not recognized.";
-    result.style.color = "#6b7280";
+    return;
   }
+
+  result.textContent = "Code not recognized.";
+  result.style.color = "#6b7280";
 });
 
 // IDENTIFICATION
@@ -193,6 +222,23 @@ document.getElementById("identifyBtn").addEventListener("click", () => {
   const input = document.getElementById("identifyInput").value.trim();
   const result = document.getElementById("identifyResult");
 
+  const storedData = JSON.parse(localStorage.getItem(REGISTERED_DATA_KEY) || "{}");
+  const freeTrialCode = storedData.code;
+
+  // Free trial identification
+  if (input === freeTrialCode) {
+    result.innerHTML = `
+      <h3>GulfTag Owner Information</h3>
+      <p><strong>Name:</strong> ${storedData.studentName}</p>
+      <p><strong>Grade:</strong> ${storedData.grade}</p>
+      <p><strong>School:</strong> ${storedData.schoolName}</p>
+      <p><strong>Type:</strong> Free Trial (30 days)</p>
+    `;
+    result.style.color = "#111827";
+    return;
+  }
+
+  // Hardcoded student
   if (input === "GULFTAG-1234567") {
     result.innerHTML = `
       <h3>GulfTag Owner Information</h3>
@@ -203,10 +249,11 @@ document.getElementById("identifyBtn").addEventListener("click", () => {
       <p><strong>Days Left:</strong> 29 days</p>
     `;
     result.style.color = "#111827";
-  } else {
-    result.textContent = "Tag not found.";
-    result.style.color = "#b91c1c";
+    return;
   }
+
+  result.textContent = "Tag not found.";
+  result.style.color = "#b91c1c";
 });
 
 // AUTO‑IDENTIFY FROM QR URL
@@ -224,24 +271,45 @@ const paymentModal = document.getElementById("paymentModal");
 const selectedPlanEl = document.getElementById("selectedPlan");
 const paymentStatusEl = document.getElementById("paymentStatus");
 
+const addressForm = document.getElementById("addressForm");
+const paymentForm = document.getElementById("paymentForm");
+
+// Open modal
 document.querySelectorAll(".open-payment").forEach(btn => {
   btn.addEventListener("click", () => {
     const plan = btn.getAttribute("data-plan");
     selectedPlanEl.textContent = `Selected plan: ${plan}`;
     paymentStatusEl.textContent = "";
+
+    addressForm.style.display = "block";
+    paymentForm.style.display = "none";
+
+    addressForm.reset();
+    paymentForm.reset();
+
     paymentModal.classList.add("active");
   });
 });
 
+// Close modal
 document.getElementById("closePayment").addEventListener("click", () => {
   paymentModal.classList.remove("active");
 });
 
+// Click outside closes modal
 paymentModal.addEventListener("click", e => {
   if (e.target === paymentModal) paymentModal.classList.remove("active");
 });
 
-document.getElementById("paymentForm").addEventListener("submit", e => {
+// STEP 1 → STEP 2
+addressForm.addEventListener("submit", e => {
+  e.preventDefault();
+  addressForm.style.display = "none";
+  paymentForm.style.display = "block";
+});
+
+// STEP 2 → SUCCESS
+paymentForm.addEventListener("submit", e => {
   e.preventDefault();
   paymentStatusEl.textContent = "Payment successful (demo).";
 });
