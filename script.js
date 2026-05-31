@@ -313,3 +313,11 @@ paymentForm.addEventListener("submit", e => {
   e.preventDefault();
   paymentStatusEl.textContent = "Payment successful (demo).";
 });
+
+document.getElementById("scrollToFounder").addEventListener("click", () => {
+  document.getElementById("founder").scrollIntoView({ behavior: "smooth" });
+});
+
+document.getElementById("scrollToExperience").addEventListener("click", () => {
+  document.getElementById("experience").scrollIntoView({ behavior: "smooth" });
+});
