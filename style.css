@@ -15,10 +15,13 @@ body {
     border-right: 1px solid #ddd;
     height: 100vh;
     position: fixed;
+    overflow-y: auto;
 }
 
 .sidebar h2 {
     margin-top: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 
 .sidebar nav {
@@ -36,10 +39,16 @@ body {
     cursor: pointer;
     text-align: left;
     font-size: 1rem;
+    transition: 0.2s;
 }
 
 .tab-btn:hover {
     background: #e7e7e7;
+}
+
+.active-btn {
+    background: #0077ff !important;
+    color: white !important;
 }
 
 /* MAIN CONTENT */
@@ -51,10 +60,16 @@ body {
 
 .tab-section {
     display: none;
+    animation: fadeIn 0.25s ease;
 }
 
 .tab-section.active {
     display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* INPUTS */
@@ -65,6 +80,7 @@ input {
     width: 300px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 1rem;
 }
 
 /* BUTTONS */
@@ -75,6 +91,8 @@ button {
     color: white;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
 }
 
 button:hover {
@@ -91,6 +109,7 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 12px;
 }
 
 #captchaText {
@@ -99,6 +118,24 @@ button:hover {
     background: #eee;
     padding: 8px 14px;
     border-radius: 6px;
+}
+
+/* TRIAL BOX */
+.trial-box {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #e8f5ff;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+/* VALIDITY BOX */
+.validity-box {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: #f3f6ff;
+    border-radius: 8px;
+    font-size: 0.98rem;
 }
 
 /* PRICING */
@@ -122,18 +159,33 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.pricing-subtext {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
 .price-row {
     background: #f3f6ff;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
+    font-size: 1rem;
 }
 
-/* FOUNDER */
+/* FOUNDER SECTION */
 .founder-container {
     display: flex;
     gap: 40px;
     align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.founder-text {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
 .founder-image img {
@@ -142,6 +194,13 @@ button:hover {
     object-fit: cover;
     border-radius: 12px;
     background: #ddd;
+}
+
+/* EXPERIENCE SECTION */
+#experience p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 700px;
 }
 
 /* MODAL */
@@ -155,6 +214,7 @@ button:hover {
     background: rgba(0,0,0,0.4);
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .modal-content {
@@ -162,10 +222,13 @@ button:hover {
     padding: 30px;
     width: 400px;
     border-radius: 12px;
+    position: relative;
 }
 
 .close {
-    float: right;
+    position: absolute;
+    right: 15px;
+    top: 10px;
     cursor: pointer;
     font-size: 24px;
 }
