@@ -1,7 +1,6 @@
-// FOOTER YEAR
+
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// SMOOTH SCROLL FOR NAVBAR LINKS
 document.querySelectorAll(".navbar nav a").forEach(link => {
   link.addEventListener("click", e => {
     const target = document.querySelector(link.getAttribute("href"));
@@ -12,12 +11,10 @@ document.querySelectorAll(".navbar nav a").forEach(link => {
   });
 });
 
-// SCROLL TO PRICING BUTTON
 document.getElementById("scrollToPricing").addEventListener("click", () => {
   document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
 });
 
-// CAPTCHA
 let captchaCorrectAnswer = null;
 
 function generateCaptcha() {
@@ -31,7 +28,6 @@ function generateCaptcha() {
 
 generateCaptcha();
 
-// FREE TRIAL STATE
 const FREE_TRIAL_KEY = "gulfTagFreeTrialUsed";
 const REGISTERED_DATA_KEY = "gulfTagRegisteredData";
 
@@ -71,7 +67,6 @@ function checkFreeTrialState() {
 
 checkFreeTrialState();
 
-// REGISTRATION FORM
 document.getElementById("registrationForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -125,7 +120,6 @@ document.getElementById("registrationForm").addEventListener("submit", function 
   checkFreeTrialState();
 });
 
-// PRINT STICKER WITH QR
 printBtn.addEventListener("click", () => {
   const storedData = localStorage.getItem(REGISTERED_DATA_KEY);
   if (!storedData) return;
@@ -178,7 +172,6 @@ printBtn.addEventListener("click", () => {
   w.document.close();
 });
 
-// VALIDITY CHECKER
 document.getElementById("checkBtn").addEventListener("click", () => {
   const input = document.getElementById("checkInput").value.trim();
   const result = document.getElementById("checkResult");
@@ -187,7 +180,6 @@ document.getElementById("checkBtn").addEventListener("click", () => {
   const freeTrialCode = storedData.code;
   const createdAt = storedData.createdAt;
 
-  // Free trial code
   if (input === freeTrialCode) {
     const now = Date.now();
     const daysPassed = Math.floor((now - createdAt) / (1000 * 60 * 60 * 24));
@@ -199,14 +191,12 @@ document.getElementById("checkBtn").addEventListener("click", () => {
     return;
   }
 
-  // Hardcoded valid
   if (input === "GULFTAG-1234567") {
     result.textContent = "This GulfTag is valid and currently in use.";
     result.style.color = "#16a34a";
     return;
   }
 
-  // Hardcoded invalid
   if (input === "GULFTAG-0000000") {
     result.textContent = "This tag is invalid. Please purchase a new GulfTag.";
     result.style.color = "#b91c1c";
@@ -217,7 +207,6 @@ document.getElementById("checkBtn").addEventListener("click", () => {
   result.style.color = "#6b7280";
 });
 
-// IDENTIFICATION
 document.getElementById("identifyBtn").addEventListener("click", () => {
   const input = document.getElementById("identifyInput").value.trim();
   const result = document.getElementById("identifyResult");
@@ -266,7 +255,6 @@ if (autoCode) {
   document.getElementById("identify").scrollIntoView({ behavior: "smooth" });
 }
 
-// PAYMENT MODAL
 const paymentModal = document.getElementById("paymentModal");
 const selectedPlanEl = document.getElementById("selectedPlan");
 const paymentStatusEl = document.getElementById("paymentStatus");
@@ -274,7 +262,6 @@ const paymentStatusEl = document.getElementById("paymentStatus");
 const addressForm = document.getElementById("addressForm");
 const paymentForm = document.getElementById("paymentForm");
 
-// Open modal
 document.querySelectorAll(".open-payment").forEach(btn => {
   btn.addEventListener("click", () => {
     const plan = btn.getAttribute("data-plan");
@@ -291,24 +278,20 @@ document.querySelectorAll(".open-payment").forEach(btn => {
   });
 });
 
-// Close modal
 document.getElementById("closePayment").addEventListener("click", () => {
   paymentModal.classList.remove("active");
 });
 
-// Click outside closes modal
 paymentModal.addEventListener("click", e => {
   if (e.target === paymentModal) paymentModal.classList.remove("active");
 });
 
-// STEP 1 → STEP 2
 addressForm.addEventListener("submit", e => {
   e.preventDefault();
   addressForm.style.display = "none";
   paymentForm.style.display = "block";
 });
 
-// STEP 2 → SUCCESS
 paymentForm.addEventListener("submit", e => {
   e.preventDefault();
   paymentStatusEl.textContent = "Payment successful (demo).";
