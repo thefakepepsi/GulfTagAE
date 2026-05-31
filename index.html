@@ -1,319 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>GulfTag AE – Smart QR Stickers for Schools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css?v=4" />
+    <meta charset="UTF-8">
+    <title>GulfTag AE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="logo">GulfTag AE</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#how">How It Works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#parents">Parents</a>
-      <a href="#checker">Check Tag</a>
-      <a href="#identify">Identification</a>
-      <a href="#register">Free Trial</a>
-    </nav>
-  </header>
 
-  <main>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>GulfTag AE</h2>
+        <nav>
+            <button class="tab-btn active-btn" data-target="identify">Identify Item</button>
+            <button class="tab-btn" data-target="generate">Generate QR</button>
+            <button class="tab-btn" data-target="validity">Check Validity</button>
+            <button class="tab-btn" data-target="register">Register</button>
+            <button class="tab-btn" data-target="pricing">Pricing</button>
+            <button class="tab-btn" data-target="founder">About the Founder</button>
+            <button class="tab-btn" data-target="experience">My Personal Experience</button>
+        </nav>
+    </aside>
 
-    <!-- HOME -->
-    <section id="home" class="section hero">
-      <div class="container">
-        <h1>Smart QR stickers that help lost school items find their way home.</h1>
-        <p>
-          GulfTag AE partners with schools to make lost‑and‑found a thing of the past.
-          With simple QR stickers on student belongings, staff can scan and instantly
-          see who an item belongs to and how to return it.
-        </p>
-        <p>
-          Schools choose a plan, students receive their stickers, and from that moment on,
-          lost items finally have a clear way back home.
-        </p>
-        <button id="scrollToPricing" class="btn primary">View School Plans</button>
-      </div>
-    </section>
+    <!-- MAIN CONTENT -->
+    <main class="content">
 
-    <!-- PROBLEM -->
-    <section id="problem" class="section">
-      <div class="container">
-        <h2>The problem: lost items cost time, money, and energy</h2>
-        <p>
-          Every school deals with the same daily challenge: students lose things. Water bottles,
-          lunch boxes, jackets, and pencil cases get left behind in classrooms, buses, and
-          playgrounds. Multiply this by hundreds of students, and the school ends up with a
-          mountain of unclaimed items.
-        </p>
-      </div>
-    </section>
+        <!-- IDENTIFICATION TAB -->
+        <section id="identify" class="tab-section active">
+            <h2>Identify Item</h2>
+            <p>Scan a QR code or enter the code manually.</p>
 
-    <!-- SOLUTION -->
-    <section id="solution" class="section alt">
-      <div class="container">
-        <h2>The solution: GulfTag AE makes lost items find their way home</h2>
-        <p>
-          GulfTag AE uses smart QR stickers to connect lost items back to their owners.
-          Staff scan the code and instantly see who it belongs to.
-        </p>
-      </div>
-    </section>
+            <input id="validityInput" type="text" placeholder="Enter code">
+            <button id="checkValidity">Check</button>
 
-    <!-- HOW IT WORKS -->
-    <section id="how" class="section">
-      <div class="container">
-        <h2>How It Works</h2>
-        <div class="how-steps">
-          <div class="how-step">
-            <h3>1. Find It</h3>
-            <p>Staff find an item with a GulfTag sticker.</p>
-          </div>
-          <div class="how-step">
-            <h3>2. Scan It</h3>
-            <p>They scan the QR code.</p>
-          </div>
-          <div class="how-step">
-            <h3>3. Identify</h3>
-            <p>The system shows who the item belongs to.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div id="validityResult" class="validity-box"></div>
+        </section>
 
-    <!-- SCHOOL PRICING -->
-    <section id="pricing" class="section">
-      <div class="container">
-        <h2>Pricing: simple plans for every school</h2>
+        <!-- QR GENERATOR -->
+        <section id="generate" class="tab-section">
+            <h2>Generate QR Code</h2>
 
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>AED 100 / month</h3>
-            <p class="pricing-subtitle">Up to 150 students</p>
-            <button class="btn secondary open-payment"
-              data-plan="AED 100 / month – up to 150 students">
-              Try Demo Payment
-            </button>
-          </div>
+            <input id="qrName" type="text" placeholder="Student Name">
+            <input id="qrClass" type="text" placeholder="Class">
 
-          <div class="pricing-card featured">
-            <h3>AED 200 / month</h3>
-            <p class="pricing-subtitle">Up to 250 students</p>
-            <button class="btn primary open-payment"
-              data-plan="AED 200 / month – up to 250 students">
-              Try Demo Payment
-            </button>
-          </div>
+            <button id="generateQR">Generate</button>
 
-          <div class="pricing-card">
-            <h3>AED 500 / month</h3>
-            <p class="pricing-subtitle">Up to 400 students</p>
-            <button class="btn secondary open-payment"
-              data-plan="AED 500 / month – up to 400 students">
-              Try Demo Payment
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div id="qrContainer"></div>
 
-    <!-- PARENTS PRICING -->
-    <section id="parents" class="section alt">
-      <div class="container">
-        <h2>Plans for Parents & Others</h2>
+            <button id="printSticker">Print Sticker</button>
+        </section>
 
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>AED 5 / month</h3>
-            <p class="pricing-subtitle">1 sticker per month</p>
-            <button class="btn secondary open-payment"
-              data-plan="AED 5 / month – 1 sticker">
-              Try Demo Payment
-            </button>
-          </div>
+        <!-- VALIDITY CHECKER -->
+        <section id="validity" class="tab-section">
+            <h2>Check Validity</h2>
+            <input id="validityInput2" type="text" placeholder="Enter code">
+            <button id="checkValidity2">Check</button>
+            <div id="validityResult2" class="validity-box"></div>
+        </section>
 
-          <div class="pricing-card featured">
-            <h3>AED 10 / month</h3>
-            <p class="pricing-subtitle">2 stickers per month</p>
-            <button class="btn primary open-payment"
-              data-plan="AED 10 / month – 2 stickers">
-              Try Demo Payment
-            </button>
-          </div>
+        <!-- REGISTRATION -->
+        <section id="register" class="tab-section">
+            <h2>Register</h2>
 
-          <div class="pricing-card">
-            <h3>AED 20 / month</h3>
-            <p class="pricing-subtitle">5 stickers per month</p>
-            <button class="btn secondary open-payment"
-              data-plan="AED 20 / month – 5 stickers">
-              Try Demo Payment
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+            <form id="registerForm">
+                <input id="regName" type="text" placeholder="Your Name" required>
+                <input id="regEmail" type="email" placeholder="Your Email" required>
 
-    <!-- TAG CHECKER -->
-    <section id="checker" class="section">
-      <div class="container">
-        <h2>Check GulfTag Validity</h2>
-        <div class="card">
-          <input id="checkInput" type="text" placeholder="GULFTAG-XXXXXXX" class="checker-input" />
-          <button id="checkBtn" class="btn primary">Check Code</button>
-          <p id="checkResult" class="checker-result"></p>
-        </div>
-      </div>
-    </section>
+                <div class="captcha-box">
+                    <span id="captchaText"></span>
+                    <button type="button" id="refreshCaptcha">↻</button>
+                </div>
 
-    <!-- IDENTIFICATION -->
-    <section id="identify" class="section">
-      <div class="container">
-        <h2>GulfTag Identification</h2>
-        <div class="card">
-          <input id="identifyInput" type="text" placeholder="GULFTAG-XXXXXXX" class="checker-input" />
-          <button id="identifyBtn" class="btn primary">Identify Tag</button>
-          <div id="identifyResult" class="identify-result"></div>
-        </div>
-      </div>
-    </section>
+                <input id="captchaInput" type="text" placeholder="Enter CAPTCHA" required>
 
-    <!-- FREE TRIAL -->
-    <section id="register" class="section alt">
-      <div class="container">
-        <h2>Free trial: generate and print your first GulfTag</h2>
+                <button type="submit">Register</button>
+            </form>
 
-        <div class="form-layout">
-          <form id="registrationForm" class="card">
-            <div class="form-row">
-              <label>Student name</label>
-              <input type="text" id="studentName" required />
+            <button id="startTrial">Start Free Trial</button>
+            <div id="trialCodeBox" class="trial-box"></div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="tab-section">
+            <h2>Pricing</h2>
+
+            <div class="pricing-wrapper">
+
+                <div class="pricing-card">
+                    <div class="pricing-icon">🏫</div>
+                    <h3>Schools & Educators</h3>
+                    <p class="pricing-subtext">Full access for schools with student-wide QR tagging.</p>
+
+                    <div class="price-row"><strong>100 AED / month</strong> — up to 150 students</div>
+                    <div class="price-row"><strong>200 AED / month</strong> — up to 250 students</div>
+                    <div class="price-row"><strong>500 AED / month</strong> — up to 400 students</div>
+
+                    <button class="pricing-btn">Choose School Plan</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-icon">👨‍👩‍👧</div>
+                    <h3>Parents & Others</h3>
+                    <p class="pricing-subtext">Simple monthly plans for families.</p>
+
+                    <div class="price-row"><strong>4.99 AED / month</strong> — 1 QR tag</div>
+                    <div class="price-row"><strong>9.99 AED / month</strong> — 2 QR tags</div>
+                    <div class="price-row"><strong>15.99 AED / month</strong> — 3 QR tags</div>
+
+                    <button class="pricing-btn">Choose Parent Plan</button>
+                </div>
+
             </div>
+        </section>
 
-            <div class="form-row">
-              <label>Grade</label>
-              <input type="text" id="grade" required />
+        <!-- ABOUT FOUNDER -->
+        <section id="founder" class="tab-section">
+            <h2>About the Founder</h2>
+
+            <div class="founder-container">
+                <div class="founder-text">
+                    <p>
+                        Hi, I’m Madhav, the student behind GulfTag AE. I created this project because I noticed how often students lose their belongings at school and how difficult it is to find the owner. I enjoy coding and building real solutions to everyday problems, and I wanted to make something that actually helps students, parents, and teachers.
+                    </p>
+                    <p>
+                        <strong>CEO Superpower:</strong> I am good at coding and use my skills to come up with innovative solutions to daily nuisances.
+                    </p>
+                </div>
+
+                <div class="founder-image">
+                    <img src="placeholder.jpg" alt="Founder image coming soon">
+                </div>
             </div>
+        </section>
 
-            <div class="form-row">
-              <label>School name</label>
-              <input type="text" id="schoolName" required />
+        <!-- EXPERIENCE -->
+        <section id="experience" class="tab-section">
+            <h2>My Personal Experience</h2>
+            <p>
+                A few months ago, I lost my water bottle after PE. When I went to the lost‑and‑found, it was overflowing with jackets, lunch boxes, and bottles stacked on top of each other. Mine wasn’t there and someone had probably taken it because everything looked the same and nobody checks ownership. I remember feeling annoyed and helpless, and wondered how my parents would react. Then I realized, this happens to students every single day. That is why I am developing GulfTag AE to prevent anything from remaining unidentified.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span id="closePayment" class="close">&times;</span>
+
+            <h2>Enter Address</h2>
+            <input type="text" id="addrName" placeholder="Full Name">
+            <input type="text" id="addrAddress" placeholder="Address">
+            <input type="text" id="addrCity" placeholder="City">
+            <input type="text" id="addrPhone" placeholder="Phone Number">
+
+            <button id="continueToPayment">Continue</button>
+
+            <div id="paymentStep" style="display:none; margin-top:20px;">
+                <h2>Payment</h2>
+                <input type="text" id="cardNumber" placeholder="Card Number">
+                <input type="text" id="cardExpiry" placeholder="Expiry Date">
+                <input type="text" id="cardCVV" placeholder="CVV">
+
+                <button id="finishPayment">Finish</button>
             </div>
-
-            <div class="form-row">
-              <label>Parent contact</label>
-              <input type="text" id="parentContact" required />
-            </div>
-
-            <div class="form-row captcha-row">
-              <label id="captchaQuestion"></label>
-              <input type="number" id="captchaAnswer" required />
-            </div>
-
-            <p id="trialMessage" class="info"></p>
-
-            <button type="submit" id="registerBtn" class="btn primary">
-              Generate GulfTag Code (Free Trial)
-            </button>
-          </form>
-
-          <div class="card qr-card">
-            <h3>Your GulfTag Code</h3>
-            <div id="codeBox" class="code-box">No code yet</div>
-            <p id="qrInfo" class="info"></p>
-            <button id="printBtn" class="btn secondary" disabled>Print Sticker</button>
-          </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- PAYMENT MODAL -->
-  <div id="paymentModal" class="modal-overlay">
-    <div class="modal">
-      <button class="modal-close" id="closePayment">&times;</button>
-      <h2>Demo Checkout</h2>
-      <p id="selectedPlan" class="modal-plan"></p>
-
-      <!-- STEP 1: ADDRESS FORM -->
-      <form id="addressForm">
-        <h3>Step 1: Address Details</h3>
-
-        <div class="form-row">
-          <label>Full Name</label>
-          <input type="text" id="addrFullName" required />
-        </div>
-
-        <div class="form-row">
-          <label>Address Line 1</label>
-          <input type="text" id="addrLine1" required />
-        </div>
-
-        <div class="form-row">
-          <label>Address Line 2 (optional)</label>
-          <input type="text" id="addrLine2" />
-        </div>
-
-        <div class="form-row">
-          <label>City</label>
-          <input type="text" id="addrCity" required />
-        </div>
-
-        <div class="form-row">
-          <label>Emirate</label>
-          <input type="text" id="addrEmirate" required />
-        </div>
-
-        <div class="form-row">
-          <label>Postal Code</label>
-          <input type="text" id="addrPostal" required />
-        </div>
-
-        <button type="submit" class="btn primary">Next</button>
-      </form>
-
-      <!-- STEP 2: PAYMENT FORM -->
-      <form id="paymentForm" style="display:none;">
-        <h3>Step 2: Payment Details</h3>
-
-        <div class="form-row">
-          <label>Cardholder Name</label>
-          <input type="text" id="cardName" required />
-        </div>
-
-        <div class="form-row">
-          <label>Card Number</label>
-          <input type="text" id="cardNumber" maxlength="19" required />
-        </div>
-
-        <div class="form-row inline">
-          <div>
-            <label>Expiry (MM/YY)</label>
-            <input type="text" id="expiry" maxlength="5" required />
-          </div>
-          <div>
-            <label>CVV</label>
-            <input type="password" id="cvv" maxlength="4" required />
-          </div>
-        </div>
-
-        <button type="submit" class="btn primary">Pay (Demo)</button>
-        <p id="paymentStatus" class="success"></p>
-      </form>
     </div>
-  </div>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> GulfTag AE. Smart QR stickers for schools.</p>
-    </div>
-  </footer>
+    <!-- QRCode library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <script src="script.js?v=20"></script>
+    <script src="script.js"></script>
 </body>
 </html>
