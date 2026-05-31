@@ -5,3 +5,5 @@ GulfTag AE is a simple system I built to help students, parents, and schools kee
 
 I have used JavaScript (script.js), HTML (index.html), and CSS (style.css).
 This is the link to my website : https://thefakepepsi.github.io/GulfTagAE/
+
+Built from 23rd May - 31st May
