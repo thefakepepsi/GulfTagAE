@@ -21,6 +21,7 @@
         <a href="#checker">Check Tag</a>
         <a href="#identify">Identification</a>
         <a href="#register">Free Trial</a>
+        <a href="#tagRegistration">Register Tag</a>
         <a href="#founder">Founder</a>
       </nav>
     </header>
@@ -245,6 +246,103 @@
         </div>
       </div>
     </section>
+      </section>
+
+<section id="tagRegistration" class="section">
+  <div class="container">
+
+    <h2>Register Purchased GulfTag</h2>
+
+    <div class="card">
+
+      <p>
+        Enter the GulfTag code you received after purchasing your GulfTag.
+      </p>
+
+      <input
+        id="purchaseCodeInput"
+        type="text"
+        placeholder="GULFTAG-XXXXXXX"
+        class="checker-input"
+      />
+
+      <button
+        id="validatePurchasedTag"
+        class="btn primary">
+        Validate GulfTag
+      </button>
+
+      <p id="purchaseValidationResult"></p>
+
+      <div
+        id="registrationArea"
+        style="display:none; margin-top:20px;">
+
+        <button
+          id="showRegisterForm"
+          class="btn secondary">
+          Register This Tag
+        </button>
+
+        <form
+          id="purchasedTagForm"
+          style="display:none; margin-top:20px;">
+
+          <div class="form-row">
+            <label>Name</label>
+            <input
+              type="text"
+              id="tagOwnerName"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <label>Class</label>
+            <input
+              type="text"
+              id="tagClass"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <label>Section</label>
+            <input
+              type="text"
+              id="tagSection"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <label>School</label>
+            <input
+              type="text"
+              id="tagSchool"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn primary">
+            Complete Registration
+          </button>
+
+        </form>
+
+        <p
+          id="registrationSuccess"
+          style="margin-top:15px;font-weight:bold;">
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
   </main>
 
   <div id="paymentModal" class="modal-overlay">
@@ -314,7 +412,7 @@
         </div>
 
         <button type="submit" class="btn primary">Pay</button>
-        <p id="paymentStatus" class="success"></p>
+        <div id="paymentStatus" class="success"></div>
       </form>
     </div>
   </div>
