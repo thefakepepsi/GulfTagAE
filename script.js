@@ -1,4 +1,3 @@
-
 document.getElementById("year").textContent = new Date().getFullYear();
 
 document.querySelectorAll(".navbar nav a").forEach(link => {
@@ -22,7 +21,7 @@ function generateCaptcha() {
   const b = Math.floor(Math.random() * 8) + 2;
   captchaCorrectAnswer = a + b;
   document.getElementById("captchaQuestion").textContent =
-    `Prove you’re human: What is ${a} + ${b}?`;
+    `Prove you're human: What is ${a} + ${b}?`;
   document.getElementById("captchaAnswer").value = "";
 }
 
@@ -309,6 +308,7 @@ document.querySelectorAll(".open-payment").forEach(btn => {
     const plan = btn.getAttribute("data-plan");
     selectedPlanEl.textContent = `Selected plan: ${plan}`;
     paymentStatusEl.textContent = "";
+    paymentStatusEl.innerHTML = "";
 
     addressForm.style.display = "block";
     paymentForm.style.display = "none";
@@ -496,10 +496,16 @@ document
     ).reset();
   });
 
-document.getElementById("scrollToFounder").addEventListener("click", () => {
-  document.getElementById("founder").scrollIntoView({ behavior: "smooth" });
-});
+const scrollToFounder = document.getElementById("scrollToFounder");
+if (scrollToFounder) {
+  scrollToFounder.addEventListener("click", () => {
+    document.getElementById("founder").scrollIntoView({ behavior: "smooth" });
+  });
+}
 
-document.getElementById("scrollToExperience").addEventListener("click", () => {
-  document.getElementById("experience").scrollIntoView({ behavior: "smooth" });
-});
+const scrollToExperience = document.getElementById("scrollToExperience");
+if (scrollToExperience) {
+  scrollToExperience.addEventListener("click", () => {
+    document.getElementById("experience").scrollIntoView({ behavior: "smooth" });
+  });
+}
