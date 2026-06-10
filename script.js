@@ -30,6 +30,9 @@ generateCaptcha();
 
 const FREE_TRIAL_KEY = "gulfTagFreeTrialUsed";
 const REGISTERED_DATA_KEY = "gulfTagRegisteredData";
+const PURCHASED_TAGS_KEY = "gulfTagPurchasedTags";
+const REGISTERED_PURCHASED_TAGS_KEY = "registeredPurchasedTags";
+let currentPurchasedCode = null;
 
 const trialMessageEl = document.getElementById("trialMessage");
 const registerBtn = document.getElementById("registerBtn");
@@ -240,7 +243,46 @@ document.getElementById("identifyBtn").addEventListener("click", () => {
     result.style.color = "#111827";
     return;
   }
+const registeredPurchasedTags =
+  JSON.parse(
+    localStorage.getItem(
+      REGISTERED_PURCHASED_TAGS_KEY
+    ) || "{}"
+  );
 
+if (registeredPurchasedTags[input]) {
+
+  const tag =
+    registeredPurchasedTags[input];
+
+  result.innerHTML = `
+    <h3>GulfTag Owner Information</h3>
+
+    <p><strong>Name:</strong>
+      ${tag.name}
+    </p>
+
+    <p><strong>Class:</strong>
+      ${tag.class}
+    </p>
+
+    <p><strong>Section:</strong>
+      ${tag.section}
+    </p>
+
+    <p><strong>School:</strong>
+      ${tag.school}
+    </p>
+
+    <p><strong>Type:</strong>
+      Purchased GulfTag
+    </p>
+  `;
+
+  result.style.color = "#111827";
+
+  return;
+}
   result.textContent = "Tag not found.";
   result.style.color = "#b91c1c";
 });
@@ -294,8 +336,165 @@ addressForm.addEventListener("submit", e => {
 
 paymentForm.addEventListener("submit", e => {
   e.preventDefault();
-  paymentStatusEl.textContent = "Payment successful (demo).";
+
+  const code = generateRandomCode();
+
+  const purchasedTags =
+    JSON.parse(localStorage.getItem(PURCHASED_TAGS_KEY) || "[]");
+
+  purchasedTags.push({
+    code,
+    createdAt: Date.now()
+  });
+
+  localStorage.setItem(
+    PURCHASED_TAGS_KEY,
+    JSON.stringify(purchasedTags)
+  );
+
+  paymentStatusEl.innerHTML = `
+    <div style="margin-top:15px;">
+      <strong>Payment Successful!</strong><br><br>
+
+      Your GulfTag Code:
+
+      <div style="
+        margin-top:10px;
+        font-size:22px;
+        font-weight:bold;
+        color:#2563eb;
+      ">
+        ${code}
+      </div>
+
+      <br>
+      Go to the Register Tag section and activate your GulfTag.
+    </div>
+  `;
 });
+
+document
+  .getElementById("validatePurchasedTag")
+  .addEventListener("click", () => {
+
+    const code =
+      document.getElementById("purchaseCodeInput")
+      .value
+      .trim();
+
+    const result =
+      document.getElementById("purchaseValidationResult");
+
+    const purchasedTags =
+      JSON.parse(localStorage.getItem(PURCHASED_TAGS_KEY) || "[]");
+
+    const registeredTags =
+      JSON.parse(
+        localStorage.getItem(
+          REGISTERED_PURCHASED_TAGS_KEY
+        ) || "{}"
+      );
+
+    const exists =
+      purchasedTags.find(tag => tag.code === code);
+
+    if (!exists) {
+      result.textContent = "Invalid GulfTag.";
+      result.style.color = "#b91c1c";
+
+      document.getElementById(
+        "registrationArea"
+      ).style.display = "none";
+
+      return;
+    }
+
+    if (registeredTags[code]) {
+      result.textContent =
+        "This GulfTag has already been registered.";
+      result.style.color = "#b91c1c";
+
+      document.getElementById(
+        "registrationArea"
+      ).style.display = "none";
+
+      return;
+    }
+
+    currentPurchasedCode = code;
+
+    result.textContent = "GulfTag is Valid.";
+    result.style.color = "#16a34a";
+
+    document.getElementById(
+      "registrationArea"
+    ).style.display = "block";
+  });
+
+document
+  .getElementById("showRegisterForm")
+  .addEventListener("click", () => {
+
+    document.getElementById(
+      "purchasedTagForm"
+    ).style.display = "block";
+  });
+
+document
+  .getElementById("purchasedTagForm")
+  .addEventListener("submit", e => {
+
+    e.preventDefault();
+
+    const registrations =
+      JSON.parse(
+        localStorage.getItem(
+          REGISTERED_PURCHASED_TAGS_KEY
+        ) || "{}"
+      );
+
+    registrations[currentPurchasedCode] = {
+      name:
+        document.getElementById(
+          "tagOwnerName"
+        ).value.trim(),
+
+      class:
+        document.getElementById(
+          "tagClass"
+        ).value.trim(),
+
+      section:
+        document.getElementById(
+          "tagSection"
+        ).value.trim(),
+
+      school:
+        document.getElementById(
+          "tagSchool"
+        ).value.trim(),
+
+      registeredAt: Date.now()
+    };
+
+    localStorage.setItem(
+      REGISTERED_PURCHASED_TAGS_KEY,
+      JSON.stringify(registrations)
+    );
+
+    document.getElementById(
+      "registrationSuccess"
+    ).textContent =
+      "GulfTag successfully registered.";
+
+    document.getElementById(
+      "registrationSuccess"
+    ).style.color = "#16a34a";
+
+    document.getElementById(
+      "purchasedTagForm"
+    ).reset();
+  });
 
 document.getElementById("scrollToFounder").addEventListener("click", () => {
   document.getElementById("founder").scrollIntoView({ behavior: "smooth" });
